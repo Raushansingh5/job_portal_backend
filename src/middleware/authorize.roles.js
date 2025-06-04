@@ -1,11 +1,8 @@
-// middleware/roleMiddleware.js
+
 
 import ApiError from "../utils/ApiError.js";
 
-/**
- * Restricts access based on user role.
- * Usage: authorizeRoles("employer"), authorizeRoles("jobseeker")
- */
+
 export const authorizeRoles = (...allowedRoles) => {
   return (req, res, next) => {
     const userRole = req.user?.role;
@@ -16,6 +13,6 @@ export const authorizeRoles = (...allowedRoles) => {
       );
     }
 
-    next(); // User role is allowed, proceed
+    next(); 
   };
 };

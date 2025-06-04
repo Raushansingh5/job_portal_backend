@@ -1,5 +1,4 @@
-// This file defines a custom error class called ApiError that extends the built-in JavaScript Error class.
-// It is used to create structured and consistent error objects for better error handling in the application.
+
 
 class ApiError extends Error {
   /**

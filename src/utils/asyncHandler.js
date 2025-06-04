@@ -7,4 +7,3 @@ const asyncHandler= (fn) => {
 }
 
 export default asyncHandler
-// This function takes an async function (fn) as an argument and returns a new function that handles errors.

@@ -1,4 +1,3 @@
-// routes/applicationRoutes.js
 
 import express from "express";
 import {
@@ -12,7 +11,7 @@ import { authorizeRoles } from "../middleware/authorize.roles.js";
 
 const router = express.Router();
 
-// ✅ Job seeker applies to a job
+//  Job seeker applies to a job
 router.post(
   "/:jobId",
   verifyJWT,
@@ -20,7 +19,7 @@ router.post(
   applyToJob
 );
 
-// ✅ Job seeker sees their own applications
+//  Job seeker sees their own applications
 router.get(
   "/my",
   verifyJWT,
@@ -28,7 +27,7 @@ router.get(
   getMyApplications
 );
 
-// ✅ Employer sees applicants for their job
+//  Employer sees applicants for their job
 router.get(
   "/job/:jobId",
   verifyJWT,

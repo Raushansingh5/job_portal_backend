@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 
-// MongoDB connection string
+
 
 
  const connectDB = async () => {

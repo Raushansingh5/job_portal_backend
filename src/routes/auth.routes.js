@@ -1,4 +1,4 @@
-// routes/authRoutes.js
+
 
 import express from "express";
 import {
@@ -15,12 +15,12 @@ import { verifyJWT } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
-// ✅ Public Routes
+// Public Routes
 router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/refresh-token", refreshAccessToken);
 
-// ✅ Protected Routes (require JWT)
+// Protected Routes (require JWT)
 router.post("/logout", verifyJWT, logoutUser);
 router.post("/change-password", verifyJWT, changeCurrentPassword);
 router.get("/current-user", verifyJWT, getCurrentUser);

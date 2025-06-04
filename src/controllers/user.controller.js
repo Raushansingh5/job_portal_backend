@@ -6,7 +6,7 @@ import ApiResponse from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 
-// 🔐 Generate Access & Refresh Tokens
+//  Generate Access & Refresh Tokens
 const generateTokens = async (userId) => {
   const user = await User.findById(userId);
   const accessToken = user.generateAccessToken();
@@ -18,7 +18,7 @@ const generateTokens = async (userId) => {
   return { accessToken, refreshToken };
 };
 
-// 🔁 Refresh Access Token
+//  Refresh Access Token
 const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies?.refreshToken || req.body?.refreshToken;
@@ -54,7 +54,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     );
 });
 
-// 📝 Register User
+//  Register User
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, role, company } = req.body;
 
@@ -82,7 +82,7 @@ const registerUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, result, "User registered successfully"));
 });
 
-// 🔑 Login User
+//  Login User
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -118,7 +118,7 @@ const loginUser = asyncHandler(async (req, res) => {
     );
 });
 
-// 🚪 Logout
+//  Logout
 const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(req.user._id, { refreshToken: "" });
 
@@ -131,14 +131,14 @@ const logoutUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, {}, "Logged out successfully"));
 });
 
-// 🙋 Get Current User
+//  Get Current User
 const getCurrentUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
     .json(new ApiResponse(200, req.user, "Current user info"));
 });
 
-// 🔐 Change Password
+//  Change Password
 const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 

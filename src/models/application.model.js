@@ -1,4 +1,4 @@
-// models/Application.js
+
 
 import mongoose, { Schema } from "mongoose";
 
@@ -32,7 +32,7 @@ const applicationSchema = new Schema(
     },
 
     resume: {
-      type: String, // Store file URL or base64 string
+      type: String, 
     },
   },
   { timestamps: true }

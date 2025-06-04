@@ -6,7 +6,7 @@ import ApiResponse from "../utils/ApiResponse.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import mongoose from "mongoose";
 
-// ✅ 1. Create a new job (employer only)
+// Create a new job (employer only)
 export const createJob = asyncHandler(async (req, res) => {
   const {
     title,
@@ -44,7 +44,7 @@ export const createJob = asyncHandler(async (req, res) => {
     .json(new ApiResponse(201, job, "Job posted successfully"));
 });
 
-// ✅ 2. Get all jobs with search & filters
+//  Get all jobs with search & filters
 export const getAllJobs = asyncHandler(async (req, res) => {
   const { search, location, category, type } = req.query;
 
@@ -75,7 +75,7 @@ export const getAllJobs = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, jobs, "Jobs fetched successfully"));
 });
 
-// ✅ 3. Get single job by ID
+//  Get single job by ID
 export const getJobById = asyncHandler(async (req, res) => {
   const jobId = req.params.id;
 
@@ -94,7 +94,7 @@ export const getJobById = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, job, "Job fetched successfully"));
 });
 
-// ✅ 4. Update job (employer only & owner check)
+// Update job (employer only & owner check)
 export const updateJob = asyncHandler(async (req, res) => {
   const jobId = req.params.id;
 
@@ -122,7 +122,7 @@ export const updateJob = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, updatedJob, "Job updated successfully"));
 });
 
-// ✅ 5. Delete job (employer only & owner check)
+//  Delete job (employer only & owner check)
 export const deleteJob = asyncHandler(async (req, res) => {
   const jobId = req.params.id;
 

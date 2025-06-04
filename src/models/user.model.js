@@ -44,7 +44,7 @@ const userSchema = new Schema(
   }
 );
 
-// 🔒 Pre-save hook: Hash password before saving
+//  Pre-save hook: Hash password before saving
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);
@@ -52,12 +52,12 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-// 🔐 Method: Compare password
+//  Method: Compare password
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// 🔐 Method: Generate Access Token
+//  Method: Generate Access Token
 userSchema.methods.generateAccessToken = function () {
   return jwt.sign(
     {
@@ -71,7 +71,7 @@ userSchema.methods.generateAccessToken = function () {
   );
 };
 
-// 🔁 Method: Generate Refresh Token
+// Method: Generate Refresh Token
 userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {

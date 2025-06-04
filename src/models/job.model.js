@@ -1,4 +1,4 @@
-// models/Job.js
+
 
 import mongoose, { Schema } from "mongoose";
 

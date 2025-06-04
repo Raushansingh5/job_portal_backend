@@ -6,10 +6,15 @@ import ApiError from "../utils/ApiError.js";
 import asyncHandler from "../utils/asyncHandler.js";
 
 export const verifyJWT = asyncHandler(async (req, res, next) => {
-  const token =
-    req.cookies?.accessToken ||
-    req.body?.accessToken ||
-    req.header("Authorization")?.replace("Bearer ", "");
+  let token;
+
+  // ✅ Always prefer the Authorization header
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith("Bearer ")) {
+    token = authHeader.split(" ")[1];
+  } else if (req.cookies?.accessToken) {
+    token = req.cookies.accessToken;
+  }
 
   if (!token) {
     throw new ApiError("Access token is required", 401);

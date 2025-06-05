@@ -79,3 +79,41 @@ export const getApplicantsForJob = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, applicants, "Applicants fetched successfully"));
 });
+
+// PATCH /applications/:applicationId/status
+export const updateApplicationStatus = asyncHandler(async (req, res) => {
+  const applicationId = req.params.applicationId;
+  const { status } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(applicationId)) {
+    throw new ApiError("Invalid Application ID", 400);
+  }
+
+  const validStatuses = ["pending", "reviewed", "accepted", "rejected"];
+  if (!validStatuses.includes(status)) {
+    throw new ApiError("Invalid status value", 400);
+  }
+
+  const application = await Application.findById(applicationId);
+  if (!application) {
+    throw new ApiError("Application not found", 404);
+  }
+
+  // Only the employer who posted the job can update the application
+  const job = await Job.findById(application.jobId);
+  if (!job) {
+    throw new ApiError("Related job not found", 404);
+  }
+
+  if (job.createdBy.toString() !== req.user._id.toString()) {
+    throw new ApiError("You are not authorized to update this application", 403);
+  }
+
+  application.status = status;
+  await application.save();
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, application, "Application status updated successfully"));
+});
+

@@ -4,6 +4,7 @@ import {
   applyToJob,
   getMyApplications,
   getApplicantsForJob,
+  updateApplicationStatus
 } from "../controllers/application.controller.js";
 
 import { verifyJWT } from "../middleware/auth.middleware.js";
@@ -35,4 +36,14 @@ router.get(
   getApplicantsForJob
 );
 
+router.patch(
+  "/:applicationId/status",
+  verifyJWT,
+  authorizeRoles("employer"),
+  updateApplicationStatus
+);
+
+
 export default router;
+
+

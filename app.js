@@ -11,7 +11,7 @@ import applicationRoutes from "./src/routes/application.routes.js";
 const app = express();
 
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+  origin: process.env.CORS_ORIGIN || "https://job-portal-frontend-t6ij.onrender.com",
   credentials: true,
    exposedHeaders: ['Authorization']
 }));
